@@ -12,8 +12,8 @@ public:
     vector<int> shuffle() {
         vector<int> v(nums);
         for (int i=0; i<(int)v.size(); i++) {
-            int pos = rand()%((int)v.size());
-            swap(v[i], v[pos]);
+            int pos = rand()%((int)v.size()-i);
+            swap(v[i], v[i+pos]);
         }
         return v;
     }
