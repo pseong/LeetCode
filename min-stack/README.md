@@ -1,3 +1,4 @@
+[Discussion Post (created on 6/3/2022 at 23:17)](https://leetcode.com/problems/min-stack/discuss/1919903/c%2B%2B-solution)  
 <h2>  Min Stack</h2><hr><div><p>Design a stack that supports push, pop, top, and retrieving the minimum element in constant time.</p>
 
 <p>Implement the <code>MinStack</code> class:</p>
