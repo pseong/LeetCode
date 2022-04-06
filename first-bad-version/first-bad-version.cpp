@@ -6,7 +6,7 @@ public:
     int firstBadVersion(int n) {
         int lo = 1;
         int hi = INT_MAX;
-        int ans = 0;
+        int ans = -1;
         while (lo <= hi) {
             int mid = lo + (hi - lo) / 2;
             bool b = isBadVersion(mid);
