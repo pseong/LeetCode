@@ -22,7 +22,7 @@ public:
     
     void dfs(TreeNode* node, int l, int r, vector<int>& nums) {
         if (r < l) return;
-        int mid = (l + r) / 2;
+        int mid = l + (r - l) / 2;
         node->val = nums[mid];
         if (mid-l > 0) {
             TreeNode* left = new TreeNode();
