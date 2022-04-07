@@ -1,10 +1,7 @@
 class MinStack {
 public:
     stack<pair<int, int>> st;
-    MinStack() {
-        
-    }
-    
+
     void push(int val) {
         int mn = val;
         if (!st.empty()) mn = min(mn, st.top().second);
