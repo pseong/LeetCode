@@ -11,8 +11,6 @@
  */
 class Solution {
 public:
-    vector<vector<int>> ans;
-    
     vector<vector<int>> levelOrder(TreeNode* root) {
         vector<vector<int>> ans;
         dfs(root, 0, ans);
