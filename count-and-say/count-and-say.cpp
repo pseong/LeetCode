@@ -4,21 +4,16 @@ public:
         if (n == 1) return "1";
         string s = countAndSay(n-1);
         int sz = s.size();
-        char cur = s[0];
-        int cnt = 1;
         string ans = "";
-        for (int i=1; i<sz; i++) {
-            if (cur == s[i]) {
-                cnt++;
-                continue;
-            }
-            ans += to_string(cnt);
-            ans.push_back(cur);
-            cur = s[i];
-            cnt = 1;
+        int begin = 0;
+        int end = 1;
+        while (begin < sz) {
+            while (end < sz && s[end] == s[end-1]) end++;
+            ans += to_string(end-begin);
+            ans += s[begin];
+            begin = end;
+            end++;
         }
-        ans += to_string(cnt);
-        ans.push_back(cur);
         return ans;
     }
 };
