@@ -10,8 +10,8 @@ public:
         }
         
         vector<vector<string>> ans;
-        for (auto at : m) {
-            ans.push_back(at.second);
+        for (auto& at : m) {
+            ans.push_back(move(at.second));
         }
         return ans;
     }
