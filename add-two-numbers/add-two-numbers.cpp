@@ -13,9 +13,9 @@ public:
     ListNode* addTwoNumbers(ListNode* l1, ListNode* l2) {
         ListNode* before = new ListNode();
         ListNode* cur = before;
-        int add = 0;
+        int carry = 0;
         while (true) {
-            int sum = add;
+            int sum = carry;
             if (l1) sum += l1->val;
             if (l2) sum += l2->val;
             
@@ -23,7 +23,7 @@ public:
                 ListNode* node = new ListNode();
                 cur->next = node;
                 node->val = sum % 10;
-                add = sum / 10;
+                carry = sum / 10;
                 cur = cur->next;
             }
             else break;
