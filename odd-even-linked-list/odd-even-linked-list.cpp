@@ -14,29 +14,14 @@ public:
         if (!head) return head;
         ListNode* odd = head;
         ListNode* even = head->next;
-        ListNode* even_head = even;
-        if(!even || !(even->next)) return head;
-        while (odd->next || even->next) {
-            if (odd->next) {
-                if (odd->next->next) {
-                    odd->next = odd->next->next;
-                    odd = odd->next;
-                }
-                else {
-                    odd->next = nullptr;
-                }
-            }
-            if (even->next) {
-                if (even->next->next) {
-                    even->next = even->next->next;
-                    even = even->next;
-                }
-                else {
-                    even->next = nullptr;
-                }
-            }
+        ListNode* evenHead = even;
+        while (odd->next && even->next) {
+            odd->next = even->next;
+            odd = odd->next;
+            even->next = odd->next;
+            even = even->next;
         }
-        odd->next = even_head;
+        odd->next = evenHead;
         return head;
     }
 };
