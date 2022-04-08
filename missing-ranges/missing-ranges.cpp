@@ -19,10 +19,7 @@ public:
             conv(lower, nums[idx]-1);
         }
         while (++idx < n) {
-            if (nums[idx] > upper) {
-                conv(nums[idx]+1, upper);
-                break;
-            }
+            if (nums[idx] > upper) break;
             conv(nums[idx-1]+1, nums[idx]-1);
         }
         if (idx >= n && nums[idx-1] < upper) {
