@@ -11,8 +11,7 @@ public:
             while (end < sz && s[end] == s[end-1]) end++;
             ans += to_string(end-begin);
             ans += s[begin];
-            begin = end;
-            end++;
+            begin = end++;
         }
         return ans;
     }
