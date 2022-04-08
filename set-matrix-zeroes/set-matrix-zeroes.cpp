@@ -15,6 +15,11 @@ public:
             if (matrix[0][j] == 0) col = true;
         }
         
+        if (matrix[0][0] == 0) {
+            col = true;
+            row = true;
+        }
+        
         for (int i=1; i<n; i++) {
             for (int j=1; j<m; j++) {
                 if (matrix[i][j] == 0) {
@@ -38,13 +43,6 @@ public:
                     matrix[i][j] = 0;
                 }
             }    
-        }
-        
-        
-        
-        if (matrix[0][0] == 0) {
-            col = true;
-            row = true;
         }
         
         if (row) {
