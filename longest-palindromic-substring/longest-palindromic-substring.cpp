@@ -18,6 +18,7 @@ public:
         string ans = "";
         for (int i=0; i<n; i++) {
             for (int j=0; j<=i; j++) {
+                if (s[j] != s[i]) continue;
                 if (chk(j, i, s) && ans.size() < i-j+1) {
                     ans = s.substr(j, i-j+1);
                     break;
