@@ -16,14 +16,8 @@ public:
         int add = 0;
         while (true) {
             int sum = add;
-            if (l1) {
-                sum += l1->val;
-                l1 = l1->next;
-            }
-            if (l2) {
-                sum += l2->val;
-                l2 = l2->next;
-            }
+            if (l1) sum += l1->val;
+            if (l2) sum += l2->val;
             
             if (sum || l1 || l2) {
                 ListNode* node = new ListNode();
@@ -33,10 +27,9 @@ public:
                 cur = cur->next;
             }
             else break;
-        }
-        if (!(before->next)) {
-            ListNode* node = new ListNode(0);
-            before->next = node;
+            
+            if (l1) l1 = l1->next;
+            if (l2) l2 = l2->next;
         }
         return before->next;
     }
