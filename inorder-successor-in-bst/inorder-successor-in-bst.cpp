@@ -8,35 +8,18 @@
  * };
  */
 class Solution {
-public:    
+public:
     TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
-        if (p->right) {
-            TreeNode* start = p->right;
-            while (start->left) start = start->left;
-            return start;
+        TreeNode* ans = nullptr;
+        
+        while (root) {
+            if (root->val <= p->val) root = root->right;
+            else {
+                ans = root;
+                root = root->left;
+            }
         }
         
-        bool b = false;
-        TreeNode* ans = nullptr;
-        findP(root, p, b, ans);
         return ans;
-    }
-    
-    void findP(TreeNode* node, TreeNode* p, bool& b, TreeNode*& ans) {
-        if (!node) return;
-        if (node == p) {
-            b = true;
-            return;
-        }
-        findP(node->left, p, b, ans);
-        if (b) {
-            if (!ans && node->val > p->val) ans = node;
-            return;
-        }
-        findP(node->right, p, b, ans);
-        if (b) {
-            if (!ans && node->val > p->val) ans = node;
-            return;
-        }
     }
 };
