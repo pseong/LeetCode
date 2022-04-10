@@ -3,15 +3,19 @@ public:
     void sortColors(vector<int>& nums) {
         int p1 = 0;
         int p2 = nums.size()-1;
-        for (int i=0; i<=p2; i++) {
-            if (nums[i] == 0) {
-                swap(nums[p1], nums[i]);
+        int cur = 0;
+        while (cur <= p2) {
+            if (nums[cur] == 2) {
+                swap(nums[cur], nums[p2]);
+                p2--;
+            }
+            else if(nums[cur] == 0) {
+                swap(nums[cur], nums[p1]);
+                cur++;
                 p1++;
             }
-            else if (nums[i] == 2) {
-                swap(nums[p2], nums[i]);
-                p2--;
-                i--;
+            else {
+                cur++;
             }
         }
     }
