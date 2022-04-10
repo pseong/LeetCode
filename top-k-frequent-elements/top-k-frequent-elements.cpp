@@ -17,5 +17,6 @@ public:
             pq.pop();
         }
         return ans;
+        // 버킷소트 사용하면 O(n)에 풀이 가능
     }
 };
