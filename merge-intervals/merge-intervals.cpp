@@ -21,7 +21,7 @@ public:
             lo = intervals[i][0];
             hi = intervals[i][1];
         }
-        if (lo != -1) ans.push_back({lo, hi});
+        ans.push_back({lo, hi});
         return ans;
     }
 };
