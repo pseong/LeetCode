@@ -5,7 +5,7 @@ public:
         int n = nums.size();
         int l = 0;
         int r = n-1;
-        int lo = -1;
+        int lo = n;
         while (l <= r) {
             int mid = l+(r-l)/2;
             if (nums[mid] >= target) {
@@ -16,7 +16,7 @@ public:
                 l = mid + 1;
             }
         }
-        if (lo==-1 || lo==n || nums[lo] != target) return {-1, -1};
+        if (lo==n || nums[lo] != target) return {-1, -1};
         
         l = 0;
         r = n-1;
