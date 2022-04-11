@@ -1,18 +1,23 @@
 class Solution {
 public:
-    bool isHappy(int n) {
-        bool chk[3000]{ 0 };
-        while (n != 1) {
-            int res = 0;
-            int tmp = n;
-            while (tmp) {
-                res += (tmp%10) * (tmp%10);
-                tmp /= 10;
-            }
-            if (chk[res]) return false;
-            chk[res] = 1;
-            n = res;
+    int cal(int n) {
+        int res = 0;
+        while (n) {
+            res += (n%10) * (n%10);
+            n /= 10;
         }
-        return true;
+        return res;
+    }
+    
+    bool isHappy(int n) {
+        int slow = n;
+        int fast = n;
+        do {
+            slow = cal(slow);
+            fast = cal(fast);
+            fast = cal(fast);
+        } while (slow != fast);
+        if (slow == 1) return true;
+        return false;
     }
 };
