@@ -7,7 +7,7 @@ public:
         int r = n-1;
         while (l <= r) {
             if (l == r) return l;
-            int mid = (l+r)/2;
+            int mid = l + (r-l)/2;
             if (nums[mid] > nums[mid+1]) {
                 r = mid;
             }
