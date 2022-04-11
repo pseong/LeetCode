@@ -1,16 +1,11 @@
 class Solution {
 public:
-    bool dp[10101]{ 0 };
     bool canJump(vector<int>& nums) {
-        dp[0] = 1;
-        for (int i=0; i<nums.size(); i++) {
-            if (dp[i] == 1) {
-                for (int k=0; k<=nums[i]; k++) {
-                    if (i+k >= nums.size()) break;
-                    dp[i+k] = 1;
-                }
-            }
+        int last = nums.size()-1;
+        for (int i=nums.size()-1; i>=0; i--) {
+            if (i+nums[i] >= last) last = i;
         }
-        return dp[nums.size()-1];
+        if (last == 0) return true;
+        return false;
     }
 };
