@@ -1,7 +1,6 @@
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
-        if (amount == 0) return 0;
         int dp[10101]{ 0 };
         memset(dp, -1, sizeof(dp));
         dp[0] = 0;
