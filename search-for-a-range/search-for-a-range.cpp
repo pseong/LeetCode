@@ -1,7 +1,6 @@
 class Solution {
 public:
     vector<int> searchRange(vector<int>& nums, int target) {
-        if (nums.empty()) return {-1, -1};
         int lo = lower_bound(nums, target);
         int hi = lower_bound(nums, target+1);
         if (lo==nums.size() || nums[lo] != target) return {-1, -1};
