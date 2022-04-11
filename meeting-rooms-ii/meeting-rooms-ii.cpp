@@ -3,14 +3,14 @@ public:
     int minMeetingRooms(vector<vector<int>>& intervals) {
         int n = intervals.size();
         int ans = 0;
-        priority_queue<int, vector<int>, greater<int>> pq;
+        multiset<int> ms;
         sort(intervals.begin(), intervals.end());
         for (int i=0; i<n; i++) {
-            while (pq.size() && pq.top() <= intervals[i][0]) {
-                pq.pop();
+            while (ms.size() && *ms.begin() <= intervals[i][0]) {
+                ms.erase(ms.begin());
             }
-            pq.push(intervals[i][1]);
-            ans = max(ans, (int)pq.size());
+            ms.insert(intervals[i][1]);
+            ans = max(ans, (int)ms.size());
         }
         return ans;
     }
