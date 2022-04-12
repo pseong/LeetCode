@@ -16,6 +16,7 @@ public:
         }
         sort(one.begin(), one.end());
         sort(two.begin(), two.end());
+        
         int ans = 0;
         for (int i=0; i<one.size(); i++) {
             ans += upper_bound(two.begin(), two.end(), -one[i])
