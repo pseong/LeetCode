@@ -23,12 +23,11 @@ public:
         }
         
         int ans = 0;
-        while (true) {
+        while (dividend <= divisor) {
             if (val >= dividend) {
                 dividend -= val;
                 ans += e;
             }
-            if (e == -1) break;
             val >>= 1;
             e >>= 1;
         }
