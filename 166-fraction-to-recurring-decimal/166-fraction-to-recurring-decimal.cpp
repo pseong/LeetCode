@@ -14,42 +14,28 @@ public:
             cnt++;
             den = -den;
         }
-        string sign;
-        if (cnt == 1) sign = "-";
+        string ans;
+        if (cnt == 1) ans += "-";
         
-        vector<string> fraction;
         unordered_map<int, int> chk;
         
         long long a = num / den;
-        num -= a*den;
+        num %= den;
+        ans += to_string(a);
+        if (num == 0) return ans;
+        ans += ".";
         
         while (num != 0) {
-            chk[num] = fraction.size();
+            if (chk.find(num) != chk.end()) {
+                ans.insert(ans.begin()+chk[num], '(');
+                ans.push_back(')');
+                return ans;
+            }
+            chk[num] = ans.size();
             num *= 10;
             long long b = num / den;
-            fraction.push_back(to_string(b));
-            if (b>0) {
-                num -= b*den;
-                if (chk[num]) {
-                    string ans = sign + to_string(a) + ".";
-                    for (int i=0; i<chk[num]; i++) {
-                        ans += fraction[i];
-                    }
-                    ans += "(";
-                    for (int i=chk[num]; i<fraction.size(); i++) {
-                        ans += fraction[i];
-                    }
-                    ans += ")";
-                    return ans;
-                }
-            }
-        }
-        string ans = sign + to_string(a);
-        if (fraction.size()) {
-            ans += ".";
-            for (int i=0; i<fraction.size(); i++) {
-                ans += fraction[i];
-            }
+            num %= den;
+            ans += to_string(b);
         }
         return ans;
     }
