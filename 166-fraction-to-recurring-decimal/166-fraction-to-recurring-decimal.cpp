@@ -5,26 +5,18 @@ public:
         long long num = numerator;
         long long den = denominator;
         
-        int cnt = 0;
-        if (num < 0) {
-            cnt++;
-            num = -num;
-        }
-        if (den < 0) {
-            cnt++;
-            den = -den;
-        }
         string ans;
-        if (cnt == 1) ans += "-";
+        if (num<0 ^ den<0) ans += "-";
         
-        unordered_map<int, int> chk;
+        num = labs(num);
+        den = labs(den);
         
-        long long a = num / den;
+        ans += to_string(num/den);
         num %= den;
-        ans += to_string(a);
         if (num == 0) return ans;
         ans += ".";
         
+        unordered_map<int, int> chk;
         while (num != 0) {
             if (chk.find(num) != chk.end()) {
                 ans.insert(ans.begin()+chk[num], '(');
@@ -33,9 +25,8 @@ public:
             }
             chk[num] = ans.size();
             num *= 10;
-            long long b = num / den;
+            ans += to_string(num/den);
             num %= den;
-            ans += to_string(b);
         }
         return ans;
     }
