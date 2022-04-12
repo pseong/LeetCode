@@ -7,10 +7,8 @@ public:
         while (carry) {
             carry &= ~(1<<31);
             carry <<= 1;
-            int cry = carry;
-            cry = sum&cry;
-            sum ^= carry;
-            carry = cry;
+            pair<int, int> p = {sum&carry, sum^carry};
+            tie(carry, sum) = p;
         }
         
         return sum;
