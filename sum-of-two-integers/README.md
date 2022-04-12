@@ -1,3 +1,4 @@
+[Discussion Post (created on 12/3/2022 at 14:20)](https://leetcode.com/problems/sum-of-two-integers/discuss/1938382/C%2B%2B-Very-Simple-7-Lines-Solution)  
 <h2>  Sum of Two Integers</h2><hr><div><p>Given two integers <code>a</code> and <code>b</code>, return <em>the sum of the two integers without using the operators</em> <code>+</code> <em>and</em> <code>-</code>.</p>
 
 <p>&nbsp;</p>
