@@ -24,25 +24,24 @@ public:
         num -= a*den;
         
         while (num != 0) {
+            if (chk[num]) {
+                string ans = sign + to_string(a) + ".";
+                for (int i=0; i<chk[num]; i++) {
+                    ans += fraction[i];
+                }
+                ans += "(";
+                for (int i=chk[num]; i<fraction.size(); i++) {
+                    ans += fraction[i];
+                }
+                ans += ")";
+                return ans;
+            }
             chk[num] = fraction.size();
             num *= 10;
             long long b = num / den;
             fraction.push_back(to_string(b));
-            if (b>0) {
-                num -= b*den;
-                if (chk[num]) {
-                    string ans = sign + to_string(a) + ".";
-                    for (int i=0; i<chk[num]; i++) {
-                        ans += fraction[i];
-                    }
-                    ans += "(";
-                    for (int i=chk[num]; i<fraction.size(); i++) {
-                        ans += fraction[i];
-                    }
-                    ans += ")";
-                    return ans;
-                }
-            }
+            num -= b*den;
+            
         }
         string ans = sign + to_string(a);
         if (fraction.size()) {
