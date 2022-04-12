@@ -27,7 +27,6 @@ public:
     }
 
     TreeNode* my_deserialize(vector<string>& v, int& idx) {
-        // if (idx >= v.size()) return nullptr;
         if (v[idx] == "null") return nullptr;
         TreeNode* node = new TreeNode(stoi(v[idx]));
         node->left = my_deserialize(v, ++idx);
@@ -45,7 +44,7 @@ public:
             }
             else {
                 v.push_back(pool);
-                pool = "";
+                pool.clear();
             }
         }
         
