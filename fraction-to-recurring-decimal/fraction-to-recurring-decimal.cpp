@@ -14,18 +14,18 @@ public:
             cnt++;
             den = -den;
         }
-        string sign;
-        if (cnt == 1) sign = "-";
+        string ans;
+        if (cnt == 1) ans += "-";
         
         vector<string> fraction;
         unordered_map<int, int> chk;
         
         long long a = num / den;
         num -= a*den;
-        
+        ans += to_string(a);
         while (num != 0) {
-            if (chk[num]) {
-                string ans = sign + to_string(a) + ".";
+            if (chk.find(num) != chk.end()) {
+                ans += ".";
                 for (int i=0; i<chk[num]; i++) {
                     ans += fraction[i];
                 }
@@ -41,9 +41,8 @@ public:
             long long b = num / den;
             fraction.push_back(to_string(b));
             num -= b*den;
-            
         }
-        string ans = sign + to_string(a);
+        
         if (fraction.size()) {
             ans += ".";
             for (int i=0; i<fraction.size(); i++) {
