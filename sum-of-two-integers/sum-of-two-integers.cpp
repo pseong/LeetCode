@@ -1,16 +1,15 @@
 class Solution {
 public:
     int getSum(int a, int b) {
-        int carry = a&b;
-        int sum = a^b;
+
         
-        while (carry) {
-            carry &= ~(1<<31);
-            carry <<= 1;
-            pair<int, int> p = {sum&carry, sum^carry};
-            tie(carry, sum) = p;
-        }
+        do {
+            pair<int, int> p = {a&b, a^b};
+            tie(b, a) = p;
+            b &= ~(1<<31);
+            b <<= 1;
+        } while (b);
         
-        return sum;
+        return a;
     }
 };
