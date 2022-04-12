@@ -1,3 +1,4 @@
+[Discussion Post (created on 13/3/2022 at 1:54)](https://leetcode.com/problems/4sum-ii/discuss/1940148/C%2B%2B-O(n2lgn)-Binary-Search-Solution)  
 <h2>  4Sum II</h2><hr><div><p>Given four integer arrays <code>nums1</code>, <code>nums2</code>, <code>nums3</code>, and <code>nums4</code> all of length <code>n</code>, return the number of tuples <code>(i, j, k, l)</code> such that:</p>
 
 <ul>
