@@ -1,8 +1,8 @@
 class Solution {
 public:
-    int bucket[150]{ 0 };
+    int bucket[145]{ 0 };
     int table[20202]{ 0 };
-    int sz = 150;
+    int sz = 145;
     int mx = 0;
     int BIAS = 10000;
     
