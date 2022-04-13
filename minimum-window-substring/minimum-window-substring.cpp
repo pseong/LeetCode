@@ -11,20 +11,16 @@ public:
         int ans_l = -1;
         int len = 1000000;
         for (int r=0; r<s.size(); r++) {
-            hist[s[r]-'A']--;
-            if (hist[s[r]-'A'] >= 0) cnt--;
-            if (!cnt) {
-                while (!cnt) {
-                    hist[s[l]-'A']++;
-                    if (hist[s[l]-'A'] > 0) {
-                        cnt++;
-                        if (len > r-l+1) {
-                            ans_l = l;
-                            len = r-l+1;
-                        }
+            if (--hist[s[r]-'A'] >= 0) cnt--;
+            while (!cnt) {
+                if (++hist[s[l]-'A'] > 0) {
+                    cnt++;
+                    if (len > r-l+1) {
+                        ans_l = l;
+                        len = r-l+1;
                     }
-                    l++;
                 }
+                l++;
             }
         }
         if (ans_l == -1) return "";
