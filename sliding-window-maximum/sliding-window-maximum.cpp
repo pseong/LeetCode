@@ -1,45 +1,22 @@
 class Solution {
 public:
-    int bucket[145]{ 0 };
-    int table[20202]{ 0 };
-    int sz = 145;
-    int mx = 0;
-    int BIAS = 10000;
+    deque<int> q;
     
-    void add(int x) {
-        bucket[x/sz]++;
-        table[x]++;
-        if (x > mx) mx = x;
-    }
-    
-    void sub(int x) {
-        bucket[x/sz]--;
-        table[x]--;
-        if (!table[x] && mx==x) {
-            for (int i=x/sz; i>=0; i--) {
-                if (bucket[i]) {
-                    for (int j=(i+1)*sz-1; j>=i*sz; j--) {
-                        if (table[j]) {
-                            mx = j;
-                            return;
-                        }
-                    }
-                }
-            }
-        }
+    void add(vector<int>& nums, int i, int k) {
+        if (q.size() && q.front() == i-k) q.pop_front();
+        while (q.size() && nums[q.back()] <= nums[i]) q.pop_back();
+        q.push_back(i);
     }
     
     vector<int> maxSlidingWindow(vector<int>& nums, int k) {
         for (int i=0; i<k; i++) {
-            add(nums[i]+BIAS);
+            add(nums, i, k);
         }
-        
         vector<int> ans;
-        ans.push_back(mx-BIAS);
+        ans.push_back(nums[q.front()]);
         for (int i=k; i<nums.size(); i++) {
-            add(nums[i]+BIAS);
-            sub(nums[i-k]+BIAS);
-            ans.push_back(mx-BIAS);
+            add(nums, i, k);
+            ans.push_back(nums[q.front()]);
         }
         return ans;
     }
