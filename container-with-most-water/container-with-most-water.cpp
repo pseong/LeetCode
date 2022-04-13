@@ -9,9 +9,13 @@ public:
             if (height[l] > height[r]) {
                 r--;
             }       
-            else {
+            else if (height[l] < height[r]) {
                 l++;
             }
+            else {
+                r--;
+                l++;
+            }            
         }
         return ans;
     }
