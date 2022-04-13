@@ -1,26 +1,23 @@
 class Solution {
 public:
-    int init = 2000000000;
     int longestConsecutive(vector<int>& nums) {
-        map<int, bool> m;
+        unordered_set<int> st;
         for (int i=0; i<nums.size(); i++) {
-            m[nums[i]] = true;
+            st.insert(nums[i]);
         }
+        
         int ans = 0;
-        int res = 0;
-        int prev = 2000000000;
-        for (auto it=m.begin(); it!=m.end(); it++) {
-            if (prev==init || prev+1==it->first) {
-                res++;
-            }
-            else {
+        for (int i=0; i<nums.size(); i++) {
+            if (st.find(nums[i]-1) == st.end()) {
+                int res = 0;
+                int start = nums[i];
+                while (st.find(start) != st.end()) {
+                    res++;
+                    start++;
+                }
                 ans = max(ans, res);
-                res = 1;
-                prev = init;
             }
-            prev = it->first;
         }
-        ans = max(ans, res);
         return ans;
     }
 };
