@@ -15,22 +15,16 @@ public:
         int n = board.size();
         int m = board[0].size();
         
-        vector<vector<int>> ans(n, vector<int>(m, 0));
+        vector<vector<int>> cp = board;
         for (int i=0; i<n; i++) {
             for (int j=0; j<m; j++) {
-                int cnt = cal(i, j, n, m, board);
-                if (board[i][j]) {
-                    if (cnt == 2 || cnt == 3) ans[i][j] = 1;
+                int cnt = cal(i, j, n, m, cp);
+                if (cp[i][j]) {
+                    if (cnt < 2 || cnt > 3) board[i][j] = 0;
                 }
                 else {
-                    if (cnt == 3) ans[i][j] = 1;
+                    if (cnt == 3) board[i][j] = 1;
                 }
-            }
-        }
-        
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<m; j++) {
-                board[i][j] = ans[i][j];
             }
         }
     }
