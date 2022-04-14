@@ -39,14 +39,13 @@ public:
     }
     
     ListNode* getMid(ListNode* head) {
-        ListNode* slow = head;
         ListNode* fast = head;
         while (fast && fast->next && fast->next->next) {
-            slow = slow->next;
+            head = head->next;
             fast = fast->next->next;
         }
-        ListNode* ans = slow->next;
-        slow->next = nullptr;
+        ListNode* ans = head->next;
+        head->next = nullptr;
         return ans;
     }
 };
