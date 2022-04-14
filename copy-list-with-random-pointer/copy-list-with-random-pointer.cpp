@@ -44,5 +44,6 @@ public:
         }
         go->next = nullptr;
         return ans;
+        // map으로도 풀이 가능 (map을 활용한게 훨 쉽다.)
     }
 };
