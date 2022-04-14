@@ -19,7 +19,8 @@ public:
         if (root->right) r = dfs(root->right, p, q);
         bool now = ((root->val == p) || (root->val == q)) ? true : false;
         if (ans) return true;
-        if ((l&r) | (l&now) | (r&now)) ans = root;
+        int cnt = l + r + now;
+        if (cnt == 2) ans = root;
         return l|r|now;
     }
     
