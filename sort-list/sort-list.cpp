@@ -11,24 +11,20 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        ListNode* before = new ListNode(-1000000, head);
+        vector<int> v;
         ListNode* go = head;
-        while (go && go->next) {
-            if (go->val > go->next->val) {
-                ListNode* node = go->next;
-                ListNode* find = before;
-                while (true) {
-                    if (find->val <= node->val && find->next->val >= node->val) {
-                        go->next = node->next;
-                        node->next = find->next;
-                        find->next = node;
-                        break;
-                    }
-                    find = find->next;
-                }
-            }
-            else go = go->next;
+        while (go) {
+            v.push_back(go->val);
+            go = go->next;
         }
-        return before->next;
+        sort(v.begin(), v.end());
+        ListNode* ans = new ListNode();
+        go = ans;
+        for (int i=0; i<v.size(); i++) {
+            ListNode* node = new ListNode(v[i]);
+            go->next = node;
+            go = go->next;
+        }
+        return ans->next;
     }
 };
