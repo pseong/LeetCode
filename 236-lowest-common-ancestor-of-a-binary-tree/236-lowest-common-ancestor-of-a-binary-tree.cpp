@@ -12,16 +12,12 @@ public:
     TreeNode* ans = nullptr;
     
     bool dfs(TreeNode* root, int p, int q) {
-        if (ans) return true;
-        bool l = false;
-        bool r = false;
-        if (root->left) l = dfs(root->left, p, q);
-        if (root->right) r = dfs(root->right, p, q);
-        bool now = ((root->val == p) || (root->val == q)) ? true : false;
-        if (ans) return true;
-        int cnt = l + r + now;
-        if (cnt == 2) ans = root;
-        return l|r|now;
+        if (!root) return 0;
+        bool l = dfs(root->left, p, q);
+        bool r = dfs(root->right, p, q);
+        bool m = (root->val == p || root->val == q) ? 1 : 0;
+        if (l+r+m == 2) ans = root;
+        return (l+r+m>0);
     }
     
     TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
