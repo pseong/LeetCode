@@ -12,9 +12,7 @@ class Solution {
 public:
     ListNode* sortList(ListNode* head) {
         if (!head) return nullptr;
-        ListNode* bbbb = head->next;
-        if (!bbbb) return head;
-        
+        if (!head->next) return head;
         ListNode* mid = getMid(head);
         ListNode* a = sortList(head);
         ListNode* b = sortList(mid);
@@ -22,8 +20,8 @@ public:
     }
     
     ListNode* merge(ListNode* a, ListNode* b) {
-        ListNode* ans = new ListNode(-1000000);
-        ListNode* go = ans;
+        ListNode ans(-1000000);
+        ListNode* go = &ans;
         while (a && b) {
             if (a->val < b->val) {
                 go->next = a;
@@ -37,7 +35,7 @@ public:
         }
         if (a) go->next = a;
         else if (b) go->next = b;
-        return ans->next;
+        return ans.next;
     }
     
     ListNode* getMid(ListNode* head) {
