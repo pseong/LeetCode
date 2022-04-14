@@ -1,9 +1,9 @@
 class Solution {
-public:
-    int in[101010]{ 0 };
-    vector<int> adj[101010];
-    
+public:    
     bool canFinish(int numCourses, vector<vector<int>>& prerequisites) {
+        vector<int> in(numCourses, 0);
+        vector<vector<int>> adj(numCourses, vector<int>());
+        
         for (vector<int>& v : prerequisites) {
             adj[v[0]].push_back(v[1]);
             in[v[1]]++;
