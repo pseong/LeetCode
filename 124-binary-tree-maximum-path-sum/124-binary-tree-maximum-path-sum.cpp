@@ -11,14 +11,14 @@
  */
 class Solution {
 public:
-    int ans = -1000000000;
+    int ans = INT_MIN;
     
     int dfs(TreeNode* node) {
-        if (!node) return -1000000000;
-        int l = dfs(node->left);
-        int r = dfs(node->right);
-        ans = max({ans, l+node->val, r+node->val, node->val, l+r+node->val});
-        return max({l+node->val, r+node->val, node->val});
+        if (!node) return 0;
+        int l = max(dfs(node->left), 0);
+        int r = max(dfs(node->right), 0);
+        ans = max({ans, l+r+node->val});
+        return node->val + max(l, r);
     }
     
     int maxPathSum(TreeNode* root) {
