@@ -11,20 +11,44 @@
 class Solution {
 public:
     ListNode* sortList(ListNode* head) {
-        vector<int> v;
-        ListNode* go = head;
-        while (go) {
-            v.push_back(go->val);
+        if (!head) return nullptr;
+        ListNode* bbbb = head->next;
+        if (!bbbb) return head;
+        
+        ListNode* mid = getMid(head);
+        ListNode* a = sortList(head);
+        ListNode* b = sortList(mid);
+        return merge(a, b);
+    }
+    
+    ListNode* merge(ListNode* a, ListNode* b) {
+        ListNode* ans = new ListNode(-1000000);
+        ListNode* go = ans;
+        while (a && b) {
+            if (a->val < b->val) {
+                go->next = a;
+                a = a->next;
+            }
+            else {
+                go->next = b;
+                b = b->next;
+            }
             go = go->next;
         }
-        sort(v.begin(), v.end());
-        ListNode* ans = new ListNode();
-        go = ans;
-        for (int i=0; i<v.size(); i++) {
-            ListNode* node = new ListNode(v[i]);
-            go->next = node;
-            go = go->next;
-        }
+        if (a) go->next = a;
+        else if (b) go->next = b;
         return ans->next;
+    }
+    
+    ListNode* getMid(ListNode* head) {
+        ListNode* slow = head;
+        ListNode* fast = head;
+        while (fast && fast->next && fast->next->next) {
+            slow = slow->next;
+            fast = fast->next->next;
+        }
+        ListNode* ans = slow->next;
+        slow->next = nullptr;
+        return ans;
     }
 };
