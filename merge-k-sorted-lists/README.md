@@ -1,3 +1,4 @@
+[Discussion Post (created on 14/3/2022 at 16:46)](https://leetcode.com/problems/merge-k-sorted-lists/discuss/1945729/C%2B%2B-Divide-And-Conquer-O(nlogk)-Solution)  
 <h2>  Merge k Sorted Lists</h2><hr><div><p>You are given an array of <code>k</code> linked-lists <code>lists</code>, each linked-list is sorted in ascending order.</p>
 
 <p><em>Merge all the linked-lists into one sorted linked-list and return it.</em></p>
