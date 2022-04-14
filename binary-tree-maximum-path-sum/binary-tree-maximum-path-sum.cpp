@@ -17,7 +17,7 @@ public:
         if (!node) return -1000000000;
         int l = dfs(node->left);
         int r = dfs(node->right);
-        ans = max({ans, l, r, l+node->val, r+node->val, node->val, l+r+node->val});
+        ans = max({ans, l+node->val, r+node->val, node->val, l+r+node->val});
         return max({l+node->val, r+node->val, node->val});
     }
     
