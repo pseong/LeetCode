@@ -2,34 +2,28 @@ class Solution {
 public:
     vector<int> adj[5000];
     int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
-        wordList.push_back(beginWord);
-        unordered_map<string, int> m;
-        for (int i=0; i<wordList.size(); i++) {
-            m[wordList[i]] = i;
-        }     
-        if (m.find(endWord) == m.end()) return 0;
-        int ans[5000]{ 0 };
-        queue<int> q;
-        ans[(int)wordList.size()-1] = 1;
-        q.push((int)wordList.size()-1);
+        unordered_set<string> m(wordList.begin(), wordList.end());
+        queue<string> q;
+        q.push(beginWord);
+        int cnt = 1;
         while (q.size()) {
-            int idx = q.front(); q.pop();
-            string& s = wordList[idx];
-            for (int i=0; i<s.size(); i++) {
-                char tmp = s[i];
-                for (char c='a'; c<='z'; c++) {
-                    s[i] = c;
-                    auto it = m.find(s);
-                    if (it != m.end() && !ans[it->second]) {
-                        if (it->second == m[endWord]) {
-                            return ans[idx] + 1;
+            int n = q.size();
+            for (int i=0; i<n; i++) {
+                string s = q.front(); q.pop();
+                for (int j=0; j<s.size(); j++) {
+                    char tmp = s[j];
+                    for (char c='a'; c<='z'; c++) {
+                        s[j] = c;
+                        if (m.find(s) != m.end()) {
+                            m.erase(s);
+                            if (s == endWord) return cnt + 1;
+                            q.push(s);
                         }
-                        ans[it->second] = ans[idx] + 1;
-                        q.push(it->second);
                     }
+                    s[j] = tmp;
                 }
-                s[i] = tmp;
             }
+            cnt++;
         }
         return 0;
     }
