@@ -24,7 +24,7 @@ public:
             }
         }
         
-        if (cnt != numCourses) return false;
-        return true;
+        return cnt == numCourses;
+        // dfs로도 풀수있음 1 : 현재 방문하고 있는 노드 2: 방문끝난노드
     }
 };
