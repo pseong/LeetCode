@@ -1,3 +1,4 @@
+[Discussion Post (created on 16/3/2022 at 0:56)](https://leetcode.com/problems/palindrome-partitioning/discuss/1950286/C%2B%2B-Solution)  
 <h2>  Palindrome Partitioning</h2><hr><div><p>Given a string <code>s</code>, partition <code>s</code> such that every substring of the partition is a <strong>palindrome</strong>. Return all possible palindrome partitioning of <code>s</code>.</p>
 
 <p>A <strong>palindrome</strong> string is a string that reads the same backward as forward.</p>
