@@ -1,6 +1,6 @@
 class Solution {
 public:
-    struct Seg {
+    /*struct Seg {
         int tree[100000]{ 0 };
         
         void update(int n, int s, int e, int x) {
@@ -30,6 +30,35 @@ public:
             int k = nums[i] + 10001;
             ans[i] = seg.query(1, 1, 20001, 1, k-1);
             seg.update(1, 1, 20001, k);
+        }
+        return ans;
+    }*/
+    
+    struct FWT {
+        int tree[20002]{ 0 };
+        int sum(int i) {
+            int sum = 0;
+            while (i > 0) {
+                sum += tree[i];
+                i -= (i & -i);
+            }
+            return sum;
+        }
+        
+        void update(int i, int diff) {
+            while (i <= 20001) {
+                tree[i] += diff;
+                i += (i & -i);
+            }
+        }
+    } fwt;
+    
+    vector<int> countSmaller(vector<int>& nums) {
+        vector<int> ans(nums.size(), 0);
+        for (int i=nums.size()-1; i>=0; i--) {
+            int k = nums[i] + 10001;
+            ans[i] = fwt.sum(k-1);
+            fwt.update(k, 1);
         }
         return ans;
     }
