@@ -4,7 +4,6 @@ public:
         vector<vector<int>> adj(26, vector<int>());
         vector<int> in(26, 0);
         vector<bool> chk(26, 0);
-        int n = words.size();
         
         for (int i=0; i<words.size(); i++) {
             for (int j=0; j<words[i].size(); j++) {
@@ -23,11 +22,12 @@ public:
                         break;
                     }
                 }
-                if (k == n) {
-                    if (words[i].size() > words[j].size()) return "";
+                if (k==n && words[i].size() > words[j].size()) {
+                    return "";
                 }
             }
         }
+        
         queue<int> q;
         string ans;
         for (int i=0; i<26; i++) {
