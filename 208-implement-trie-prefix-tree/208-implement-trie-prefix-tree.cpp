@@ -17,13 +17,14 @@ public:
             node->end = 1;
             return;
         }
-        if (node->child[word[idx]-'a']) {
-            _insert(node->child[word[idx]-'a'], word, idx+1);
+        Node* child = node->child[word[idx]-'a'];
+        if (child) {
+            _insert(child, word, idx+1);
             return;
         }
-        Node* n = new Node(word[idx]);
-        node->child[word[idx]-'a'] = n;
-        _insert(n, word, idx+1);
+        child = new Node(word[idx]);
+        node->child[word[idx]-'a'] = child;
+        _insert(child, word, idx+1);
     }
     
     bool _search(Node* node, string& word, int idx) {
