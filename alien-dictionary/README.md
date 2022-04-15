@@ -1,3 +1,4 @@
+[Discussion Post (created on 15/3/2022 at 23:34)](https://leetcode.com/problems/alien-dictionary/discuss/1950067/C%2B%2B-Topological-Sort-Solution)  
 <h2>  Alien Dictionary</h2><hr><div><p>There is a new alien language that uses the English alphabet. However, the order among the letters is unknown to you.</p>
 
 <p>You are given a list of strings <code>words</code> from the alien language's dictionary, where the strings in <code>words</code> are <strong>sorted lexicographically</strong> by the rules of this new language.</p>
