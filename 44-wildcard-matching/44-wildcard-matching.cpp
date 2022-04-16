@@ -1,34 +1,31 @@
 class Solution {
 public:
     bool isMatch(string s, string p) {
-        s = "#" + s;
-        p = "#" + p;
-        
-        vector<vector<bool>> dp(p.size(), vector<bool>(s.size(), 0));
-        
-        dp[0][0] = 1;
-        for (int i=1; i<p.size(); i++) {
-            if (p[i] == '*') {
-                for (int b=0; b<s.size(); b++) {
-                    if (dp[i-1][b]) {
-                        for (int y=b; y<s.size(); y++) {
-                            dp[i][y] = 1;
-                        }
-                        break;
-                    }
-                }
+        int sIdx = 0;
+        int pIdx = 0;
+        int starIdx = -1;
+        int stmpIdx = -1;
+        while (sIdx < s.size()) {
+            if (pIdx < p.size() && p[pIdx] == '?' || s[sIdx] == p[pIdx]) {
+                sIdx++;
+                pIdx++;
             }
-            else if (p[i] == '?') {
-                for (int b=1; b<s.size(); b++) {
-                    if (dp[i-1][b-1]) dp[i][b] = 1;
-                }
+            else if (pIdx < p.size() && p[pIdx] == '*') {
+                starIdx = pIdx;
+                stmpIdx = sIdx;
+                ++pIdx;
+            }
+            else if (starIdx == -1) {
+                return false;
             }
             else {
-                for (int b=1; b<s.size(); b++) {
-                    if (s[b] == p[i] && dp[i-1][b-1]) dp[i][b] = 1;
-                }
+                pIdx = starIdx + 1;
+                sIdx = ++stmpIdx;
             }
         }
-        return dp[p.size()-1][s.size()-1];
+        for (int i=pIdx; i<p.size(); i++) {
+            if (p[i] != '*') return false;
+        }
+        return true;
     }
 };
