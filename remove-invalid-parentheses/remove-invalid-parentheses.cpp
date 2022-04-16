@@ -4,7 +4,7 @@ public:
     unordered_set<string> ans;
     string now;
     int remove;
-    void go(int idx, int open, int close) {
+    void go(int idx, int open, int close, int pass) {
         if (idx == s.size()) {
             if (open == close && s.size()-now.size() == remove) {
                 ans.insert(now);
@@ -13,17 +13,17 @@ public:
         }
         if (s[idx] >= 'a' && s[idx] <= 'z') {
             now.push_back(s[idx]);
-            go(idx+1, open, close);
+            go(idx+1, open, close, pass);
             now.pop_back();
             return;
         }
-        go(idx+1, open, close);
+        if (pass+1 <= remove) go(idx+1, open, close, pass+1);
         now.push_back(s[idx]);
         if (s[idx] == '(') {
-            go(idx+1, open+1, close);
+            go(idx+1, open+1, close, pass);
         }
         else if (s[idx] == ')') {
-            if (open >= close+1) go(idx+1, open, close+1);
+            if (open >= close+1) go(idx+1, open, close+1, pass);
         }
         now.pop_back();
     }
@@ -43,7 +43,7 @@ public:
             }
         }
         remove += abs(open - close);
-        go(0, 0, 0);
+        go(0, 0, 0, 0);
         return vector<string>(ans.begin(), ans.end());
     }
 };
