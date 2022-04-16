@@ -52,7 +52,7 @@ public:
     Trie trie;
     string now;
     
-    void dfs(int i, int j, Trie::Node* node, vector<vector<char>>& board) {
+    void dfs(int i, int j, Trie::Node* node, Trie::Node* par, vector<vector<char>>& board) {
         for (int d=0; d<4; d++) {
             int x = i+dx[d];
             int y = j+dy[d];
@@ -65,9 +65,22 @@ public:
                     ans.push_back(now);
                     node->children[board[x][y]-'a']->end = 0;
                 }
-                dfs(x, y, node->children[board[x][y]-'a'], board);
+                dfs(x, y, node->children[board[x][y]-'a'], node, board);
                 now.pop_back();
                 chk[x][y] = 0;
+            }
+        }
+        
+        int cnt = 0;
+        for (int i=0; i<26; i++) {
+            if (node->children[i]) cnt++;
+        }
+        if (!cnt) {
+            for (int i=0; i<26; i++) {
+                if (par->children[i] == node) {
+                    par->children[i] = nullptr;
+                    break;
+                }
             }
         }
     }
@@ -89,7 +102,7 @@ public:
                         ans.push_back(now);
                         trie.root->children[board[i][j]-'a']->end = 0;
                     }
-                    dfs(i, j, trie.root->children[board[i][j]-'a'], board);
+                    dfs(i, j, trie.root->children[board[i][j]-'a'], trie.root, board);
                     now.pop_back();
                     chk[i][j] = 0;
                 }
