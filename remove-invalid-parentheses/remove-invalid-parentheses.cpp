@@ -22,8 +22,8 @@ public:
         if (s[idx] == '(') {
             go(idx+1, open+1, close, pass);
         }
-        else if (s[idx] == ')') {
-            if (open >= close+1) go(idx+1, open, close+1, pass);
+        else if (s[idx] == ')' && open >= close+1) {
+            go(idx+1, open, close+1, pass);
         }
         now.pop_back();
     }
