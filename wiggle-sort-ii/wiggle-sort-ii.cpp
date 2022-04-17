@@ -18,10 +18,10 @@ public:
         k = n-1;
         while (j <= k) {
             if (f(j) > mid) {
-                swap(f(j++), f(i++));
+                swap(nums[(1+2*(j++)) % (n|1)], nums[(1+2*(i++)) % (n|1)]);
             }
             else if (f(j) < mid) {
-                swap(f(j), f(k--));
+                swap(nums[(1+2*(j)) % (n|1)], nums[(1+2*(k--)) % (n|1)]);
             }
             else {
                 j++;
