@@ -18,7 +18,7 @@ public:
     void put(int key, int value) {
         auto it = mp.find(key);
         if (it == mp.end()) {
-            if (dq.size() == capacity) {
+            if (mp.size() == capacity) {
                 mp.erase(dq.back().first);
                 dq.pop_back();
             }
