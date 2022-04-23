@@ -10,10 +10,7 @@ public:
     
     int get(int key) {
         if (mp.find(key) != mp.end()) {
-            int value = mp[key]->second;
-            dq.erase(mp[key]);
-            dq.push_front({key, value});
-            mp[key] = dq.begin();
+            dq.splice(dq.begin(), dq, mp.find(key)->second);
             return mp[key]->second;
         }
         else return -1;
