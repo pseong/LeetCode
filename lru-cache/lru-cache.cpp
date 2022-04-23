@@ -1,3 +1,4 @@
+
 class LRUCache {
 public:
     unordered_map<int, list<pair<int, int>>::iterator> mp;
@@ -9,8 +10,7 @@ public:
     }
     
     int get(int key) {
-        auto it = mp.find(key);
-        if (it == mp.end()) return -1;
+        if (mp.find(key) == mp.end()) return -1;
         dq.splice(dq.begin(), dq, mp.find(key)->second);
         return mp[key]->second;
     }
