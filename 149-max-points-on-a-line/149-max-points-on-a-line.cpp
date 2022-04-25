@@ -11,8 +11,7 @@ public:
                 int gcd = __gcd(dx, dy);
                 dx /= gcd;
                 dy /= gcd;
-                if (mp[dx].find(dy) == mp[dx].end()) mp[dx][dy] = 1;
-                ans = max(ans, ++mp[dx][dy]);
+                ans = max(ans, ++mp[dx][dy]+1);
             }
         }
         return ans;
