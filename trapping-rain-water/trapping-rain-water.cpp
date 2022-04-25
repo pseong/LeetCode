@@ -1,74 +1,30 @@
 class Solution {
 public:
-    struct Lazyseg {
-        typedef int _T;
-        typedef int _L;
-        int n;
-        vector<_T> S;
-        vector<_L> lazy;
-        _T(*op)(_T, _T);
-        _T t;
-        Lazyseg(const vector<_T>& A, _T(*op)(_T, _T), int n, _T t) : op(op), n(n), t(t) {
-            S.resize(4*n+10, 0);
-            lazy.resize(4*n+10, 0);
-            init(A, 1, 1, n);
-        }
-        _T init(const vector<_T>& A, int node, int s, int e) {
-            if (s == e) return S[node] = A[s];
-            int mid = (s+e)/2;
-            return S[node] = op(init(A, node*2, s, mid), init(A, node*2+1, mid+1, e));
-        }
-        void propagate(int node, int s, int e) {
-            if (lazy[node] == 0) return;
-            S[node] += lazy[node];
-            if (s!=e) {
-                lazy[node*2] += lazy[node];
-                lazy[node*2+1] += lazy[node];
-            }
-            lazy[node] = 0;
-        }
-        _T query(int node, int s, int e, int l, int r) {
-            propagate(node, s, e);
-            if (e < l || r < s) return t;
-            if (l <= s && e <= r) return S[node];
-            int mid = (s+e)/2;
-            return op(query(node*2, s, mid, l, r), query(node*2+1, mid+1, e, l, r));
-        }
-        _T query(int l, int r) {
-            return query(1, 1, n, l, r);
-        }
-        void update_range(int node, int s, int e, int l, int r, _L x) {
-            propagate(node, s, e);
-            if (e < l || r < s) return;
-            if (l <= s && e <= r) {
-                lazy[node] += x;
-                propagate(node, s, e);
-                return;
-            }
-            int mid = (s + e) / 2;
-            update_range(node*2, s, mid, l, r, x);
-            update_range(node*2+1, mid+1, e, l, r, x);
-            S[node] = op(S[node*2], S[node*2+1]);
-        }
-        void update_range(int l, int r, _L x) {
-            update_range(1, 1, n, l, r, x);
-        }
-    };
-    static int op(int a, int b) {
-        return max(a, b);
-    }
     int trap(vector<int>& height) {
-        int n = height.size();
-        height.insert(height.begin(), 0);
-        Lazyseg seg(height, op, n, 0);
+        int l = 0;
+        int r = height.size()-1;
+        int lm = 0;
+        int rm = 0;
         int ans = 0;
-        for (int i=2; i<=n-1; i++) {
-            int left = seg.query(1, i-1);
-            int right = seg.query(i+1, n);
-            int h = min(left, right);
-            int hii = height[i];
-            if (h <= height[i]) continue;
-            ans += h - height[i];
+        while (l <= r) {
+            lm = max(lm, height[l]);
+            rm = max(rm, height[r]);
+            int h = min(lm, rm);
+            if (height[l] < height[r]) {
+                ans += max(0, h-height[l]);
+                l++;
+            }
+            else if (height[l] > height[r]) {
+                ans += max(0, h-height[r]);
+                r--;
+            }
+            else {
+                ans += max(0, h-height[l]);
+                if (l != r)
+                ans += max(0, h-height[l]);
+                l++;
+                r--;
+            }
         }
         return ans;
     }
