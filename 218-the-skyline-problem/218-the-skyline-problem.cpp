@@ -20,17 +20,9 @@ public:
                 idxL++;
             }
             else if (idxL == l.size() || idxR != r.size() && (l[idxL][0] > r[idxR][0])) {
-                if (r[idxR][1] < curY) {
-                    int pre = curY;
-                    curY = max(leftY, r[idxR][1]);
-                    if (pre != curY) ans.push_back({r[idxR][0], curY});
-                }
-                else if (r[idxR][1] > curY){
-                    curY = r[idxR][1];
-                    ans.push_back({r[idxR][0], curY});
-                }
-                rightY = r[idxR][1];
-                idxR++;
+                swap(leftY, rightY);
+                swap(idxL, idxR);
+                swap(l, r);
             }
             else {
                 int pre = curY;
